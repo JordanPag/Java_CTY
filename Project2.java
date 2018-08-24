@@ -10,6 +10,8 @@ public class Project2 {
     int dealer_total = 0;
     boolean playAgain = true;
     boolean stay = false;
+    int wins = 0;
+    int losses = 0;
 
     // Start of game
     while(playAgain) {
@@ -40,9 +42,12 @@ public class Project2 {
       stay = false;
       if(hand_total == 21) {
         System.out.println("Blackjack! You win!");
+        wins ++;
       } else if(hand_total > 21) {
         System.out.println("Busted! You lose!");
+        losses ++;
       } else {
+        dealer_total = getCardTotal(dealer_hand);
         while(dealer_total < 17) {
           dealer_hand = addCard(dealer_hand, deck.draw());
           dealer_total = getCardTotal(dealer_hand);
@@ -65,8 +70,10 @@ public class Project2 {
         }
         if(dealer_total >= hand_total) {
           System.out.println("You lose!");
+          losses ++;
         } else {
           System.out.println("You win!");
+          wins ++;
         }
       }
       boolean validInput = false;
@@ -86,6 +93,7 @@ public class Project2 {
         }
       }
     }
+    System.out.println("\nYour record: " + wins + "-" + losses);
 
     System.out.println();
   }
